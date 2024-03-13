@@ -1,0 +1,139 @@
+﻿@model List<periodTracker.Models.ViewModels.SymptomViewModel>
+    <div> <br /> <br /><br /> <br /> </div>
+@{
+    ViewBag.Title = "Add Symptom";
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+}
+
+<style>
+    .bg-gray-200 {
+        background-color: #f5e9f0;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    @*.container {
+        margin-top:  50px;
+    }*@
+
+    h3 {
+        color: #848ea2;
+        font-family: 'Times New Roman', Times, serif;
+    }
+       @@keyframes slideInFromRight {
+        0% {
+            transform: translateX(100%);
+            opacity:  0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity:  1;
+        }
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #e0bbd2;
+        margin-bottom: 30px;
+        transition: box-shadow 0.3s ease;
+        animation: slideInFromRight 1s ease-out;
+    }
+
+    .card:hover {
+        box-shadow:  0  9px  12px rgba(0,  0,  0,  0.2);
+    }
+
+    .card-header {
+        padding: 20px;
+        border-bottom: 1px solid #e9ecef;
+        background-color: #b55385;
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-title {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 24px;
+        margin: 0;
+        color: #cdbfd4;
+    }
+
+    .card-body {
+        padding:  20px;
+    }
+
+    .form-check-input {
+        margin-top:  5px;
+        margin-right:  10px;
+    }
+
+    label {
+        font-family: cursive;
+        font-size: 18px;
+        color: #b55385;
+    }
+    .select {
+        background-color: #cdbfd4;
+        font-family:cursive;
+    }
+    .form-control {
+        margin-top:  10px;
+        font-size:  18px;
+    }
+
+    .btn-primary {
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #b55385;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #e0bbd2;
+    }
+
+
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Select Symptom Subtypes</h3>
+            <hr />
+            <form asp-action="SaveSubtypes" asp-controller="UserSymptom" method="post">
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">@Model[i].SymptomTypeName</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @for (var j = 0; j < Model[i].Subtypes.Count; j++)
+                                {
+                                    <div class="col-md-4">
+                                        <label>
+                                            <input type="checkbox" asp-for="@Model[i].Subtypes[j].IsSelected" />
+                                            @Model[i].Subtypes[j].SubtypeName
+                                        </label>
+                                        <select name="[@i].Subtypes[@j].SeverityId" class="select">
+                                            <option value="">Select Severity</option>
+                                            @foreach (var severity in ViewData["Severities"] as List<Severity>)
+                                            {
+                                                <option value="@severity.Id">@severity.Level</option>
+                                            }
+                                        </select>
+                                        <input type="hidden" asp-for="@Model[i].Subtypes[j].SubtypeId" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                <button type="submit" class="btn btn-primary mt-3">Save</button>
+            </form>
+        </div>
+    </div>
+</div>

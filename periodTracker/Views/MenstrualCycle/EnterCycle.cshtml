@@ -1,0 +1,182 @@
+﻿@model periodTracker.Models.ViewModels.MenstrualCycleViewModel
+
+@{
+    ViewData["Title"] = "Menstrual Cycle Overview";
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+}
+
+
+<style>
+    .container-card{
+        margin-top:90px;
+    }
+    .prediction {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: #ffe0e6;
+        margin: 0 auto;
+    }
+
+    .prediction-text {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+    .btn-primary {
+        background-color: #4caf50;
+        border-color: #4caf50;
+    }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+            border-color: #45a049;
+        }
+</style>
+
+
+<div class="container">
+    <div class="container-card">
+        <h2 class="text-center mb-5">Menstrual Cycle Overview</h2>
+
+        <div class="card-deck">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4 class="card-title">Next Period Prediction</h4>
+                    <div class="prediction">
+                        <div class="prediction-text">
+                            @if (Model.PredictedNextPeriod.HasValue)
+                            {
+                                <p>@Model.PredictedNextPeriod?.ToString("MMM d, yyyy")</p>
+                            }
+                            else
+                            {
+                                <p>Input current period</p>
+                            }
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        @if (Model.DaysLeftForNextPeriod.HasValue)
+                        {@Model.DaysLeftForNextPeriod} Days Left
+                    </p>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4 class="card-title">Current Cycle</h4>
+                    @if (Model.CurrentCycle != null)
+                    {
+                        <p class="card-text">Cycle Period: @Model.CurrentCycle.StartDate.ToString("MMM d, yyyy") - @Model.CurrentCycle.EndDate.ToString("MMM d, yyyy")</p>
+                        <p class="card-text">Cycle Length: @Model.CurrentCycle.CycleLength days</p>
+                        <p class="card-text">Period Length: @Model.CurrentCycle.PeriodLength days</p>
+                    }
+                    else
+                    {
+                        <p>No current cycle information available.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4 class="card-title">Average Cycle Length</h4>
+                    @if (Model.AverageCycleLength != null)
+                    {
+                        <p class="card-text">Average: @Model.AverageCycleLength days</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a class="btn btn-primary" asp-area="" asp-controller="UserSymptom" asp-action="ShowSelectedSymptoms">Show Symptoms</a>
+        </div>
+    </div>
+</div>
+
+
+
+    @section Scripts {
+        @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+        <script src="~/core/index.global.min.js"></script>
+        <script src="~/daygrid/index.global.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    @foreach (var cycle in Model.PreviousCycles ?? Enumerable.Empty<MenstrualCycle>())
+                        {
+                        <text>{
+                            title: 'Period',
+                            start: '@cycle.StartDate.ToString("yyyy-MM-dd")',
+                            end: '@cycle.EndDate.AddDays(1).ToString("yyyy-MM-dd")'
+                    },</text>
+                    }
+                     // Adding fertile window dates
+            @if (Model.FertileWindow != null)
+               {
+           foreach (var date in Model.FertileWindow)
+              {
+              <text>
+                   {
+            title: 'Fertile Window',
+            start: '@date.ToString("yyyy-MM-dd")',
+            rendering: 'background',
+            color: '#f3b4c0'
+                     },
+                  </text>
+                 }
+              }
+            // Adding ovulation day
+
+            {
+                title: 'Ovulation',
+                start: '@Model.OvulationDay?.ToString("yyyy-MM-dd")',
+                rendering: 'background',
+                color: '#FFA07A' // Use a light coral color for the ovulation day
+            },
+            // Adding predicted next period
+            {
+                title: 'Next Period',
+                start: '@Model.PredictedNextPeriod?.ToString("yyyy-MM-dd")',
+                rendering: 'background',
+                color: '#dd8d8a' // Use a blue color for the next period prediction
+                    },
+            @foreach (var future in Model.FutureCycles ?? Enumerable.Empty<MenstrualCycle>())
+                        {
+                        <text>{
+                            title: 'Future',
+                            start: '@future.StartDate.ToString("yyyy-MM-dd")',
+                            end: '@future.EndDate.AddDays(1).ToString("yyyy-MM-dd")',
+                            rendering: 'background',
+                            color: '#ec407a'
+                    },</text>
+                    }
+
+                ]
+            });
+
+            calendar.render();
+        });
+        </script>
+
+    }

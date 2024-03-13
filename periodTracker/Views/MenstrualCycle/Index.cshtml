@@ -1,0 +1,58 @@
+﻿@model periodTracker.Models.ViewModels.MenstrualCycleViewModel
+
+@{
+    ViewData["Title"] = "Menstrual Cycle Tracker";
+
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Display the user's current cycle -->
+<div>
+    <h3>Your Current Cycle</h3>
+    <!-- Render the current cycle details -->
+    @await Html.PartialAsync("Details", Model.CurrentCycle)
+</div>
+
+<!-- Display the average cycle length -->
+<div>
+    <h3>Average Cycle Length</h3>
+    <p>@Model.AverageCycleLength days</p>
+</div>
+
+<!-- Display the history of previous periods -->
+<div>
+    <h3>Previous Periods</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Length</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cycle in Model.PreviousCycles)
+            {
+                <tr>
+                    <td>@cycle.StartDate.ToString("d")</td>
+                    <td>@cycle.EndDate.ToString("d")</td>
+                    <td>@cycle.CycleLength days</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Display the predicted next period -->
+<div>
+    <h3>Next Period Prediction</h3>
+    <p>@(Model.PredictedNextPeriod?.ToString("MMM d, yyyy") ?? "No current period")</p>
+</div>
+
+<!-- Links to create, edit, and delete actions -->
+<div>
+    <a asp-action="Create" class="btn btn-primary">Add New Cycle</a>
+    <a asp-action="Edit" asp-route-id="@Model.CurrentCycle.Id" class="btn btn-secondary">Edit Current Cycle</a>
+    <a asp-action="Delete" asp-route-id="@Model.CurrentCycle.Id" class="btn btn-danger">Delete Current Cycle</a>
+</div>

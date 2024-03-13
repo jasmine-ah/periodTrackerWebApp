@@ -1,0 +1,101 @@
+﻿@model List<periodTracker.Models.UserSymptom>
+    <style>
+        /* Table Container */
+        .table-container {
+            margin: 20px auto;
+            margin-top:50px;
+            width: 90%;
+            @*max-width: 800px;*@
+            font-family: Arial, sans-serif;
+        }
+
+        /* Table */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+
+            /* Table Headers */
+            .table thead {
+                background-color: #ff96b7;
+                color: #ffffff;
+                text-align: left;
+            }
+
+            /* Table Cells */
+            .table th,
+            .table td {
+                padding: 12px 15px;
+                border: 1px solid #dddddd;
+            }
+
+            /* Table Rows */
+            .table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+
+                /* Even Rows */
+                .table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                /* Hover Effect for Table Rows */
+                .table tbody tr:hover {
+                    background-color: #f3f3f3;
+                    cursor: pointer;
+                }
+
+                /* Active Row Highlight */
+                .table tbody tr.active-row {
+                    background-color: #e6ffe6;
+                    color: #009879;
+                }
+
+            /* Table Footer */
+            .table tfoot {
+                background-color: #f2f2f2;
+                color: #333;
+                text-align: center;
+                font-weight: bold;
+            }
+    </style>
+    <div class="table-container">
+        <h1>Selected Symptoms</h1>
+
+        @if (Model.Any())
+        {
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Symptom Type</th>
+                        <th>Severity</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var symptom in Model)
+                    {
+                        <tr>
+
+                            <td>@symptom.Subtype.Name</td> <!-- Display the subtype name -->
+                            <td>@symptom.Severities.Level</td>
+
+                            <td>@symptom.Timestamp.ToString("g")</td> <!-- Format the timestamp -->
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <p>No selected symptoms found.</p>
+        }
+
+        <div class="section">
+            <a class="btn btn-primary" asp-area="" asp-controller="MenstrualCycle" asp-action="EnterCycle">Back</a>
+        </div>
+    </div>

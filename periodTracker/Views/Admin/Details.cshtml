@@ -1,0 +1,43 @@
+﻿@model periodTracker.Models.ViewModels.AdminDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_login.cshtml";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <h4>Basic Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">First Name</dt>
+        <dd class="col-sm-10">@Model.User.FirstName</dd>
+        <dt class="col-sm-2">Last Name</dt>
+        <dd class="col-sm-10">@Model.User.LastName</dd>
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.User.Email</dd>
+        <dt class="col-sm-2">Age</dt>
+        <dd class="col-sm-10">@Model.User.Age</dd>
+
+    </dl>
+</div>
+
+<div>
+    <h4>Menstrual Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Cycle Length</dt>
+        <dd class="col-sm-10">@Model.MenstrualProfile.CycleLength</dd>
+        <dt class="col-sm-2">Period Length</dt>
+        <dd class="col-sm-10">@Model.MenstrualProfile.PeriodLength</dd>
+        <dt class="col-sm-2">Weight</dt>
+        <dd class="col-sm-10">@Model.MenstrualProfile.Weight</dd>
+
+    </dl>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

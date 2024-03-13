@@ -1,0 +1,76 @@
+﻿@model periodTracker.Models.ViewModels.MenstrualCycleViewModel
+
+@{
+    ViewData["Title"] = "Menstrual Cycle Details";
+    Layout = "~/Views/Shared/_Layout_login.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Current Menstrual Cycle</h3>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-2">Start Date</dt>
+    <dd class="col-sm-10">@Model.CurrentCycle?.StartDate.ToString("MM/dd/yyyy")</dd>
+
+    <dt class="col-sm-2">End Date</dt>
+    <dd class="col-sm-10">@Model.CurrentCycle?.EndDate.ToString("MM/dd/yyyy")</dd>
+
+    <dt class="col-sm-2">Cycle Length</dt>
+    <dd class="col-sm-10">@Model.CurrentCycle?.CycleLength days</dd>
+
+    <dt class="col-sm-2">Period Length</dt>
+    <dd class="col-sm-10">@Model.CurrentCycle?.PeriodLength days</dd>
+</dl>
+
+<h3>Previous Menstrual Cycles</h3>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Cycle Length</th>
+            <th>Period Length</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PreviousCycles != null)
+        {
+            foreach (var cycle in Model.PreviousCycles)
+            {
+                <tr>
+                    <td>@cycle.StartDate.ToString("MM/dd/yyyy")</td>
+                    <td>@cycle.EndDate.ToString("MM/dd/yyyy")</td>
+                    <td>@cycle.CycleLength days</td>
+                    <td>@cycle.PeriodLength days</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No previous cycles found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Average Cycle Length</h3>
+<hr />
+
+<p>Your average cycle length is approximately @Model.AverageCycleLength days.</p>
+
+<h3>Predicted Next Period</h3>
+<hr />
+
+<p>Your predicted next period is on @(Model.PredictedNextPeriod?.ToString("MMM d, yyyy") ?? "No current period").</p>
+
+@* Uncomment this section if you want to show whether a reminder has been sent *@
+@*<h3>Reminder Sent</h3>
+    <hr />
+
+    <p>A reminder has been @(Model.ReminderSent ? "sent" : "not sent") for the next period.</p>*@
+

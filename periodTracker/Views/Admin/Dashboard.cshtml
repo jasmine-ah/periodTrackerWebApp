@@ -1,0 +1,128 @@
+﻿@model periodTracker.Models.ViewModels.AdminDashboardViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<style>
+    .container {
+        margin-top: 70px;
+        height: 100vh;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(to bottom right, #ff6b8a, #ffe0e6);
+        transition: transform 0.3s;
+    }
+    .cardMenst {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(to bottom right, #63b6ef, #d7ecfb);
+        transition: transform 0.3s;
+    }
+    .cardPer {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(to bottom right, #ffe5a4, #fff5dd);
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 18px;
+        color: #666;
+    }
+</style>
+
+<div class="container">
+    <h2 class="text-center mb-5">Admin Dashboard</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.TotalUsers</h5>
+                    <p class="card-text"><i class="fas fa-user"></i> Total Registered Users</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cardMenst bg-light">
+                <div class="card-body">
+
+                    <h5 class="card-title">@Model.TotalMenstruations</h5>
+                    <p class="card-text"><i class="fas fa-tachometer-alt"></i>  Total Tracked Menstruations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cardPer bg-light">
+                <div class="card-body">
+
+                    <h5 class="card-title">@Model.PercentageUsers20to35%</h5>
+                    <p class="card-text"><i class="fa fa-percent" aria-hidden="true"></i>  Percentage of Users Aged (20-35)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Total Users', 'Total Tracked Menstruations','Percentage of Users Aged (20-35) in %'],
+            datasets: [{
+                label: 'Data',
+                data: [@Model.TotalUsers, @Model.TotalMenstruations,@Model.PercentageUsers20to35 ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+}

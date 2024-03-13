@@ -1,0 +1,294 @@
+﻿@*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - periodTracker</title>
+
+
+
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/periodTracker.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">periodTracker</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">UserCreate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Symptom" asp-action="Index">Symptom</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - periodTracker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/scripts.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+*@
+
+
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+            <title>@ViewData["Title"] - periodTracker</title>
+            <meta content="" name="description">
+            <meta content="" name="keywords">
+
+            <!-- Favicons -->
+            <link href="~/assets/img/favicon.png" rel="icon">
+            <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+            <!-- Google Fonts -->
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+            <!-- Vendor CSS Files -->
+            <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
+            <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+            <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+            <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+            <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+            <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+            <!-- Template Main CSS File -->
+            <link href="~/assets/css/style.css" rel="stylesheet">
+
+   
+        </head>
+
+        <body>
+
+        <!-- ======= Header ======= -->
+        <header id="header" class="fixed-top ">
+            <div class="container d-flex align-items-center">
+              
+                <h1 class="logo me-auto"><a href="index.html">Period Tracker.</a></h1>
+
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+                <nav id="navbar" class="navbar">
+                    <ul>
+
+                        <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Index2">Home</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-controller="Account" asp-action="Create">Register</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-controller="Admin" asp-action="Dashboard">Admin</a></li>
+                        <li><a class="nav-link scrollto" href="#services">Services</a></li>
+
+
+                        <li class="dropdown">
+                            <a href="#"><span>SelfCare</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a asp-area="" asp-controller="FAQ" asp-action="Faq">Educate Yourself</a></li>
+
+
+
+                                <li class="dropdown">
+                                    <a href="#"><span>Menustration</span> <i class="bi bi-chevron-right"></i></a>
+                                    <ul>
+                                        <li><a href="@Url.Action("Menstruation", "Videos")">Menstruation Stigma</a></li>
+                                        <li><a href="@Url.Action("Menstruation2", "Videos")">Menstruation: What to Expect</a></li>
+                                        <li><a href="@Url.Action("Menstruation3", "Videos")">The Menstrual Cycle</a></li>
+                                        <li><a href="@Url.Action("Menstruation4", "Videos")">Period Symptoms and Self Care</a></li>
+                                        <li><a href="@Url.Action("Menstruation5", "Videos")">4 Yoga Poses to Relieve Cramps   Healthline</a></li>
+                                        <li><a href="@Url.Action("Menstruation6", "Videos")">How To Get Instant Relief From Menstrual Cramps And Mood Swings   Home Remedies with Upasana</a></li>
+                                        <li><a href="@Url.Action("Menstruation7", "Videos")">Period pain Try these remedies</a></li>
+                                        <li><a href="@Url.Action("Menstruation8", "Videos")">Yoga For Period Relief   How To Reduce Menstrual Pain   Glamrs Period Hacks</a></li>
+                                        <li><a href="@Url.Action("Menstruation9", "Videos")">Learn All You Need To Know About Period Hygiene With These Tips!</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#"><span>Pregnancy</span> <i class="bi bi-chevron-right"></i></a>
+                                    <ul>
+                                        <li><a href="@Url.Action("Pregnancy", "Videos")">10 Signs You're Pregnant</a></li>
+                                        <li><a href="@Url.Action("Pregnancy2", "Videos")"> The Surprising Effects of Pregnancy</a></li>
+                                        <li><a href="@Url.Action("Pregnancy3", "Videos")">Your Organs During Pregnancy</a></li>
+                                        <li><a href="@Url.Action("Pregnancy4", "Videos")">Healthy Habits Pregnancy</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#"><span>Menopause</span> <i class="bi bi-chevron-right"></i></a>
+                                    <ul>
+                                        <li><a href="@Url.Action("Menopause", "Videos")">Menopause Animation</a></li>
+                                        <li><a href="@Url.Action("Menopause2", "Videos")">Menopause Explained</a></li>
+                                        <li><a href="@Url.Action("Menopause3", "Videos")">The 3 Stages of Menopause</a></li>
+                                        <li><a href="@Url.Action("Menopause5", "Videos")">What Are the Signs and Symptoms of Menopause?</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                        <li><a class="nav-link   scrollto" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                        <li><a class="getstarted scrollto" asp-area="" asp-controller="Account" asp-action="Create">Get Started</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
+
+            </div>
+        </header><!-- End Header -->
+
+
+            
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+           
+
+
+            <!-- ======= Footer ======= -->
+                <footer id="footer">
+                    <div class="footer-newsletter">
+                        <div class="container">
+                            @model periodTracker.Models.Feedback
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6">
+                                    <h4>Send us Feedback</h4>
+                                    <p><br /></p>
+                                    <form asp-area="" asp-controller="Account" asp-action="Feedback" method="post">
+                                        <textarea asp-for="Message" class="form-control"></textarea><input type="submit" value="Send">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="footer-top">
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="col-lg-3 col-md-6 footer-contact">
+                                    <h3>Period Tracker</h3>
+                                    <p>
+                                        4 Kilo <br>
+                                        Addis Ababa<br>
+                                        Ethiopia<br><br>
+                                        <strong>Phone:</strong> +251911121314<br>
+                                        <strong>Email:</strong> pt@gmail.com<br>
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6 footer-links">
+                                    <h4>Useful Links</h4>
+                                    <ul>
+                                        <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
+                                        <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+                                        <li><i class="bx bx-chevron-right"></i> <a href="#services">Services</a></li>
+
+                                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                                    </ul>
+                                </div>
+
+
+
+                                <div class="col-lg-3 col-md-6 footer-links">
+                                    <h4>Our Social Networks</h4>
+                                    <p> You can contact contact us here</p>
+                                    <div class="social-links mt-3">
+                                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container footer-bottom clearfix">
+                        <div class="copyright">
+                            &copy; Copyright <strong><span>Period Tracker</span></strong>. All Rights Reserved
+                        </div>
+                        <div class="credits">
+                            <!-- All the links in the footer should remain intact. -->
+                            <!-- You can delete the links only if you purchased the pro version. -->
+                            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+                            <a href="https://bootstrapmade.com/"></a>
+                        </div>
+                    </div>
+                </footer><!-- End Footer -->
+
+        <div id="preloader"></div>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+        <!-- Vendor JS Files -->
+        <script src="~/assets/vendor/aos/aos.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="~/assets/vendor/waypoints/noframework.waypoints.js"></script>
+        <script src="~/assets/vendor/php-email-form/validate.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="~/assets/js/main.js"></script>
+
+   
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            @*<script src="~/js/scripts.js" asp-append-version="true"></script>*@
+            @await RenderSectionAsync("Scripts", required: false)
+        </body>
+        </html>
+
+

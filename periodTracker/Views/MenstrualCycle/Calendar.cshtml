@@ -1,0 +1,139 @@
+﻿
+@model periodTracker.Models.ViewModels.MenstrualCycleViewModel
+<div> <br /> <br /> <br /> </div>
+@{
+    ViewData["Title"] = "Menstrual Cycle Overview";
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+}
+<style>
+    .cardCal {
+
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        @*max-width: 960px;*@
+    }
+
+    h4 {
+        color: #848da1;
+    }
+
+    .card-header {
+        background-color: #ffe0e6;
+        color: #fff;
+        padding: 1rem;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #ff96b7;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #ffe0e6;
+        }
+</style>
+
+
+<div class="container">
+    <h2 class="my-4">@ViewData["Calendar"]</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-primary" asp-action="Add">Period Starts</a>
+        </div>
+
+        <div class="cardCal mt-4">
+            <div class="card-header text-white">
+                <h4>Previous Cycles</h4>
+            </div>
+            <div class="card-body">
+                <div id="calendar"></div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+    <script src="~/core/index.global.min.js"></script>
+    <script src="~/daygrid/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    @foreach (var cycle in Model.PreviousCycles ?? Enumerable.Empty<MenstrualCycle>())
+                        {
+                        <text>{
+                            title: 'Period',
+                            start: '@cycle.StartDate.ToString("yyyy-MM-dd")',
+                            end: '@cycle.EndDate.AddDays(1).ToString("yyyy-MM-dd")'
+                    },</text>
+                    }
+                     // Adding fertile window dates
+            @if (Model.FertileWindow != null)
+               {
+           foreach (var date in Model.FertileWindow)
+              {
+              <text>
+                   {
+            title: 'Fertile Window',
+            start: '@date.ToString("yyyy-MM-dd")',
+            rendering: 'background',
+            color: '#f3b4c0'
+                     },
+                  </text>
+                 }
+              }
+            // Adding ovulation day
+
+            {
+                title: 'Ovulation',
+                start: '@Model.OvulationDay?.ToString("yyyy-MM-dd")',
+                rendering: 'background',
+                color: '#FFA07A' // Use a light coral color for the ovulation day
+            },
+            // Adding predicted next period
+            {
+                title: 'Next Period',
+                start: '@Model.PredictedNextPeriod?.ToString("yyyy-MM-dd")',
+                rendering: 'background',
+                color: '#dd8d8a' // Use a blue color for the next period prediction
+                    },
+            @foreach (var future in Model.FutureCycles ?? Enumerable.Empty<MenstrualCycle>())
+                        {
+                        <text>{
+                            title: 'Future',
+                            start: '@future.StartDate.ToString("yyyy-MM-dd")',
+                            end: '@future.EndDate.AddDays(1).ToString("yyyy-MM-dd")',
+                            rendering: 'background',
+                            color: '#ec407a'
+                    },</text>
+                    }
+
+                ]
+            });
+
+            calendar.render();
+        });
+    </script>
+}

@@ -1,0 +1,157 @@
+﻿<video  width="640" height="360" controls>
+    <h2>Menstruation Stigma</h2>
+    <source src="@Url.Action("Menstruation", "Videos")" type="video/mp4">
+</video>
+<video  width="640" height="360" controls>
+    <track kind="metadata" label="Menstruation: What to Expect" srclang="en">
+    <source src="@Url.Action("Menstruation2", "Videos")" type="video/mp4">
+</video>
+<video  width="640" height="360" controls>
+        <source src="@Url.Action("Menstruation3", "Videos")" type="video/mp4">
+    </video>
+<video width="640" height="360" controls>
+        <source src="@Url.Action("Menstruation4", "Videos")" type="video/mp4">
+  
+</video>
+<video width="640" height="360" controls>
+    <h2>Menstruation Stigma</h2>
+    <source src="@Url.Action("Menstruation5", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <track kind="metadata" label="Menstruation: What to Expect" srclang="en">
+    <source src="@Url.Action("Menstruation6", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Menstruation7", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Menstruation8", "Videos")" type="video/mp4">
+
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Menstruation9", "Videos")" type="video/mp4">
+
+</video>
+
+
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Pregnancy", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Pregnancy2", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Pregnancy3", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Pregnancy4", "Videos")" type="video/mp4">
+</video>
+
+
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Menopause", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Menopause2", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Menopause3", "Videos")" type="video/mp4">
+</video>
+<video width="640" height="360" controls>
+    <source src="@Url.Action("Menopause4", "Videos")" type="video/mp4">
+</video> 
+
+
+@*Display the videos as cards *@
+@*@<div id="video-cards">
+    <div class="video-card" <source src="@Url.Action("Menstruation", "Videos")"type="video/mp4">
+        <div class="video-card-image"@*  style="background-image: url('/Videos/menstruation-stigma.jpg');"></div>
+        <div class="video-card-title">Menstruation Stigma</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Menstruation2", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/menstruation-what-to-expect.jpg');"></div>
+        <div class="video-card-title">Menstruation: What to Expect</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Menstruation3", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/the-menstrual-cycle.jpg');"></div>
+        <div class="video-card-title">The Menstrual Cycle</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Menstruation4", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/period-symptoms-and-self-care.jpg');"></div>
+        <div class="video-card-title">Period Symptoms and Self Care</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Menopause", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/menopause-animation.jpg');"></div>
+        <div class="video-card-title">Menopause Animation</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Menopause2", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/menopause-explained.jpg');"></div>
+        <div class="video-card-title">Menopause Explained</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Menopause3", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/the-3-stages-of-menopause.jpg');"></div>
+        <div class="video-card-title">The 3 Stages of Menopause</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Menopause4", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/what-are-the-signs-and-symptoms-of-menopause.jpg');"></div>
+        <div class="video-card-title">What Are the Signs and Symptoms of Menopause?</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Pregnancy", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/10-signs-youre-pregnant.jpg');"></div>
+        <div class="video-card-title">10 Signs You're Pregnant</div>
+    </div>
+    <div class="video-card" data-video-src="@Url.Action("Pregnancy2", "Videos")">
+        <div class="video-card-image" style="background-image: url('/Videos/the-surprising-effects-of-pregnancy.jpg');"></div>
+        <div class="video-card-title">
+            The Surprising Effects of Pregnancy</div>
+
+        <script>const videoCards = document.querySelectorAll("#video-cards .video-card"); 
+        const videoPlayer = document.getElementById("video-player"); 
+        // Add event listeners to play the selected video when a card is clicked 
+        videoCards.forEach(card => { card.addEventListener("click", () => { const videoSrc = card.getAttribute("data-video-src"); 
+        // Check if the videoSrc is valid if (videoSrc) 
+        { try { videoPlayer.src = videoSrc; videoPlayer.load(); 
+            videoPlayer.play(); } catch (error) { console.error("Error loading video:", error); } } }); }); 
+            </script>
+<style>
+  #video-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .video-card {
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .video-card:hover .video-card-image {
+    transform: scale(1.1);
+  }
+
+  .video-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+    .video-card-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 5px;
+        text-align: center;
+    }
+
+    #video-player {
+        display: none;
+    }*@
+
